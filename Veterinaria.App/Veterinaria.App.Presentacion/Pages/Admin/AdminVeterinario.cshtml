@@ -1,0 +1,135 @@
+﻿@page
+@model Veterinaria.App.Presentacion.Pages.AdminVeterinarioModel
+@{
+}
+
+<h1>
+    Bienvenido al módulo de administración de veterinarios
+</h1>
+
+
+<div class="accordion" id="accordionExample">
+
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                    data-target="#collapseListaVeterinarios" aria-expanded="true"
+                    aria-controls="collapseListaVeterinarios">
+                    Lista veterinarios
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseListaVeterinarios" class="collapse show" aria-labelledby="headingOne"
+            data-parent="#accordionExample">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Teléfono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>fat</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                    data-target="#collapseAdmin" aria-expanded="true" aria-controls="collapseAdmin">
+                    Admin veterinarios
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseAdmin" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <form>
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label for="id-veterinario-nombre">Nombre</label>
+                                    <input type="text" class="form-control" id="id-veterinario-nombre"
+                                        aria-describedby="id-message-nombre">
+                                    <small id="id-message-nombre" class="form-text text-muted">We'll never share your
+                                        email with
+                                        anyone
+                                        else.</small>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label for="id-veterinario-telefono">Telefono</label>
+                                    <input type="tel" class="form-control" id="id-veterinario-telefono"
+                                        aria-describedby="id-message-telefono">
+                                    <small id="id-message-telefono" class="form-text text-muted">We'll never share your
+                                        email with
+                                        anyone
+                                        else.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label for="id-veterinario-edad">Edad</label>
+                                    <input type="number" class="form-control" id="id-veterinario-edad"
+                                        aria-describedby="id-message-edad">
+                                    <small id="id-message-edad" class="form-text text-muted">We'll never share your
+                                        email with
+                                        anyone
+                                        else.</small>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label for="id-veterinario-correo">Correo</label>
+                                    <input type="email" class="form-control" id="id-veterinario-correo"
+                                        aria-describedby="id-message-correo">
+                                    <small id="id-message-correo" class="form-text text-muted">We'll never share your
+                                        email with
+                                        anyone
+                                        else.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="submit" class="btn btn-primary"
+                        style="background: #673ab7;border-color: #673ab7;">Editar</button>
+                    <button type="submit" class="btn btn-primary bg-success">Eliminar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
