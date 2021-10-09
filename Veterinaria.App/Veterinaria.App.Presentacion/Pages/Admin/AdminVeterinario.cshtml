@@ -31,31 +31,40 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Teléfono</th>
+                            <th>
+                                Acciones
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @* @for(int i = 0; i < 10; i++){
-                            <tr>
-                                <th scope="row">@(i+1)</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>310</td>
-                            </tr>
-                        }  
-                        *@
 
-                        @foreach(Veterinario v in Model.listaVeterinarios){
+
+                        @foreach (var v in Model.listaVeterinarios)
+                        {
                             <tr>
-                                <th scope="row">@v.Index</th>
+
+                                <th scope="row">@v.Id</th>
                                 <td>@v.Nombre</td>
                                 <td>@v.Correo</td>
                                 <td>@v.Telefono</td>
+                                <td>
+                                    <a class="btn btn-primary" asp-page="/Admin/AdminVeterinario" asp-route-id="@v.Id"
+                                    style="background: #673ab7;border-color: #673ab7;">
+                                        Editar
+                                    </a>
+
+                                    <form method="POST">
+                                        <button type="submit" class="btn btn-primary bg-success" asp-page-handler="Del"
+                                        asp-route-id="@v.Id">
+                                            Eliminar
+                                        </button>
+                                    </form>
+
+                                </td>
                             </tr>
                         }
 
-                        
-                                   
                     </tbody>
                 </table>
             </div>
@@ -75,7 +84,7 @@
 
         <div id="collapseAdmin" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
-                <form>
+                <form method="POST">
                     <div class="container">
 
                         <div class="row">
@@ -83,22 +92,15 @@
                                 <div class="form-group">
                                     <label for="id-veterinario-nombre">Nombre</label>
                                     <input type="text" class="form-control" id="id-veterinario-nombre"
-                                        aria-describedby="id-message-nombre">
-                                    <small id="id-message-nombre" class="form-text text-muted">We'll never share your
-                                        email with
-                                        anyone
-                                        else.</small>
+                                        aria-describedby="id-message-nombre" name="Nombre">
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label for="id-veterinario-telefono">Telefono</label>
                                     <input type="tel" class="form-control" id="id-veterinario-telefono"
-                                        aria-describedby="id-message-telefono">
-                                    <small id="id-message-telefono" class="form-text text-muted">We'll never share your
-                                        email with
-                                        anyone
-                                        else.</small>
+                                        aria-describedby="id-message-telefono" name="Telefono">
+
                                 </div>
                             </div>
                         </div>
@@ -108,32 +110,42 @@
                                 <div class="form-group">
                                     <label for="id-veterinario-edad">Edad</label>
                                     <input type="number" class="form-control" id="id-veterinario-edad"
-                                        aria-describedby="id-message-edad">
-                                    <small id="id-message-edad" class="form-text text-muted">We'll never share your
-                                        email with
-                                        anyone
-                                        else.</small>
+                                        aria-describedby="id-message-edad" name="Edad">
+
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label for="id-veterinario-correo">Correo</label>
                                     <input type="email" class="form-control" id="id-veterinario-correo"
-                                        aria-describedby="id-message-correo">
-                                    <small id="id-message-correo" class="form-text text-muted">We'll never share your
-                                        email with
-                                        anyone
-                                        else.</small>
+                                        aria-describedby="id-message-correo" name="Correo">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label for="id-veterinario-edad">Contrasenia</label>
+                                    <input type="password" class="form-control" id="id-veterinario-edad"
+                                        aria-describedby="id-message-edad" name="Contrasenia">
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label for="id-veterinario-correo">Tarjeta profesional</label>
+                                    <input type="text" class="form-control" id="id-veterinario-correo"
+                                        aria-describedby="id-message-correo" name="TarjetaProfesional">
                                 </div>
                             </div>
                         </div>
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                    <button type="submit" class="btn btn-primary"
-                        style="background: #673ab7;border-color: #673ab7;">Editar</button>
-                    <button type="submit" class="btn btn-primary bg-success">Eliminar</button>
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Add">Agregar</button>
+
                 </form>
             </div>
         </div>
@@ -141,3 +153,9 @@
     </div>
 
 </div>
+
+
+@if (Model.isNombreValid == "1")
+{
+    <script>alert("Falta el id");</script>
+}
