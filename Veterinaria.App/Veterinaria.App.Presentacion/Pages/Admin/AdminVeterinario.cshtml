@@ -21,7 +21,7 @@
             </h2>
         </div>
 
-        <div id="collapseListaVeterinarios" class="collapse show" aria-labelledby="headingOne"
+        <div id="collapseListaVeterinarios" class="@(Model.modeForm == "edicion" ? "collapse" : "collapse show")"  aria-labelledby="headingOne"
             data-parent="#accordionExample">
             <div class="card-body">
                 <table class="table table-hover">
@@ -38,10 +38,9 @@
                     </thead>
                     <tbody>
 
-
-
-                        @foreach (var v in Model.listaVeterinarios)
-                        {
+                        @if(Model.listaVeterinarios != null){
+                            foreach (var v in Model.listaVeterinarios)
+                            {
                             <tr>
 
                                 <th scope="row">@v.Id</th>
@@ -49,22 +48,30 @@
                                 <td>@v.Correo</td>
                                 <td>@v.Telefono</td>
                                 <td>
-                                    <a class="btn btn-primary" asp-page="/Admin/AdminVeterinario" asp-route-id="@v.Id"
-                                    style="background: #673ab7;border-color: #673ab7;">
-                                        Editar
-                                    </a>
-
-                                    <form method="POST">
-                                        <button type="submit" class="btn btn-primary bg-success" asp-page-handler="Del"
-                                        asp-route-id="@v.Id">
-                                            Eliminar
-                                        </button>
-                                    </form>
-
+                                    <div class="container">
+                                        <div class="row" style="width: 220px;">
+                                            <div class="col">
+                                                <a class="btn btn-primary" asp-page="/Admin/AdminVeterinario" asp-route-id="@v.Id"
+                                                style="background: #673ab7;border-color: #673ab7;">
+                                                    Editar
+                                                </a>
+                                            </div>
+                                            <div class="col">
+                                                <form method="POST">
+                                                    <button type="submit" class="btn btn-primary bg-success" asp-page-handler="Del"
+                                                    asp-route-id="@v.Id">
+                                                        Eliminar
+                                                    </button>
+                                                </form>
+                                            </div>                                   
+                                         </div>
+                                    </div>                                                                
                                 </td>
                             </tr>
+                            }
                         }
 
+                        
                     </tbody>
                 </table>
             </div>
@@ -82,24 +89,29 @@
             </h2>
         </div>
 
-        <div id="collapseAdmin" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseAdmin" class="@(Model.modeForm == "edicion" ? "collapse show" : "collapse")" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 <form method="POST">
                     <div class="container">
 
                         <div class="row">
+
+                             <input type="hidden"
+                             asp-for="@Model.veterinarioActual.Id"  class="form-control"
+                                         name="Id">
+
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label for="id-veterinario-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="id-veterinario-nombre"
-                                        aria-describedby="id-message-nombre" name="Nombre">
+                                    <label asp-for="@Model.veterinarioActual.Nombre">Nombre (*)</label>
+                                    <input asp-for="@Model.veterinarioActual.Nombre" type="text" class="form-control"
+                                         name="Nombre" required autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label for="id-veterinario-telefono">Telefono</label>
-                                    <input type="tel" class="form-control" id="id-veterinario-telefono"
-                                        aria-describedby="id-message-telefono" name="Telefono">
+                                    <label asp-for="@Model.veterinarioActual.Telefono">Telefono (*)</label>
+                                    <input asp-for="@Model.veterinarioActual.Telefono" type="tel" class="form-control"
+                                        aria-describedby="id-message-telefono" name="Telefono" required>
 
                                 </div>
                             </div>
@@ -108,17 +120,17 @@
                         <div class="row">
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label for="id-veterinario-edad">Edad</label>
-                                    <input type="number" class="form-control" id="id-veterinario-edad"
-                                        aria-describedby="id-message-edad" name="Edad">
+                                    <label asp-for="@Model.veterinarioActual.Edad">Edad (*)</label>
+                                    <input asp-for="@Model.veterinarioActual.Edad" type="number" class="form-control"
+                                        aria-describedby="id-message-edad" name="Edad" required>
 
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label for="id-veterinario-correo">Correo</label>
-                                    <input type="email" class="form-control" id="id-veterinario-correo"
-                                        aria-describedby="id-message-correo" name="Correo">
+                                    <label asp-for="@Model.veterinarioActual.Correo">Correo (*)</label>
+                                    <input asp-for="@Model.veterinarioActual.Correo" type="email" class="form-control"
+                                        aria-describedby="id-message-correo" name="Correo" required>
 
                                 </div>
                             </div>
@@ -128,23 +140,39 @@
                         <div class="row">
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label for="id-veterinario-edad">Contrasenia</label>
-                                    <input type="password" class="form-control" id="id-veterinario-edad"
-                                        aria-describedby="id-message-edad" name="Contrasenia">
+                                    <label asp-for="@Model.veterinarioActual.Contrasenia">Contrasenia (*)</label>
+                                    <input asp-for="@Model.veterinarioActual.Contrasenia" type="password"
+                                        class="form-control" aria-describedby="id-message-edad" name="Contrasenia">
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label for="id-veterinario-correo">Tarjeta profesional</label>
-                                    <input type="text" class="form-control" id="id-veterinario-correo"
-                                        aria-describedby="id-message-correo" name="TarjetaProfesional">
+                                    <label asp-for="@Model.veterinarioActual.TarjetaProfesional">Tarjeta
+                                        profesional</label>
+                                    <input asp-for="@Model.veterinarioActual.TarjetaProfesional" type="text"
+                                        class="form-control" aria-describedby="id-message-correo"
+                                        name="TarjetaProfesional">
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label asp-for="@Model.veterinarioActual.Especializacion">Especialización</label>
+                                    <input asp-for="@Model.veterinarioActual.Especializacion" type="text"
+                                        class="form-control" aria-describedby="id-message-edad" name="Especializacion">
+                                </div>
+                            </div>                           
                         </div>
 
                     </div>
 
                     <button type="submit" class="btn btn-primary" asp-page-handler="Add">Agregar</button>
+
+                    @if(Model.modeForm == "edicion") {
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Edi">Editar</button>
+                    }
 
                 </form>
             </div>

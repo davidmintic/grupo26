@@ -22,24 +22,42 @@ namespace Veterinaria.App.Presentacion.Pages
         // public List <Veterinario> listaVeterinarios = new List<Veterinario>();
 
        public IEnumerable <EntidadVeterinario> listaVeterinarios;
+
+       public EntidadVeterinario veterinarioActual;
+
+       public String modeForm  {get; set;} = "adicion";
        
 
         public void OnGet(int id)
         {
             if(id != 0){
+               this.veterinarioActual = repoVeterinario.GetVeterinario(id);
+                if(this.veterinarioActual != null) {
+                    this.modeForm = "edicion";                   
+                }                
+            } else{
+                 this.listaVeterinarios = repoVeterinario.GetVeterinarios();
+            }                                     
+        }
+        
 
+        public void OnPostEdi(EntidadVeterinario veterinarioNuevo){
+                      
+            var veterinarioEditado =  repoVeterinario.EditarVeterinario(veterinarioNuevo);          
+
+            if(veterinarioEditado !=  null) {
+                this.listaVeterinarios = repoVeterinario.GetVeterinarios();
+                Console.WriteLine("El veterinario ha sido editado");
             } else {
-
+                 Console.WriteLine("Ocurrió un error al editar el veterinario");
             }
-           
-            this.listaVeterinarios = repoVeterinario.GetVeterinarios();
-                    
         }
 
 
         public void OnPostAdd(EntidadVeterinario veterinario) {            
             repoVeterinario.AgregarVeterinario(veterinario);
-            this.listaVeterinarios = repoVeterinario.GetVeterinarios();      
+            this.listaVeterinarios = repoVeterinario.GetVeterinarios();
+                     
         }
 
 

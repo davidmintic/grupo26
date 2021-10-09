@@ -19,6 +19,7 @@ namespace Veterinaria.App.Persistencia{
         // CRUD
 
         EntidadVeterinario IRepositorioVeterinario.AgregarVeterinario(EntidadVeterinario veterinario) {
+            veterinario.FechaRegistro =  DateTime.Now;
             var veterinarioAgregado = this.appContext.Veterinarios.Add(veterinario);
             this.appContext.SaveChanges();
             return veterinarioAgregado.Entity;
@@ -29,9 +30,12 @@ namespace Veterinaria.App.Persistencia{
 
             var veterinarioEncontrado = this.appContext.Veterinarios.FirstOrDefault( p => p.Id == veterinarioNuevo.Id); 
             if(veterinarioEncontrado != null){
-                veterinarioEncontrado.Nombre = veterinarioNuevo.Nombre;
-                veterinarioEncontrado.Telefono = veterinarioNuevo.Telefono;
-                veterinarioEncontrado.Edad = veterinarioNuevo.Edad;
+                veterinarioEncontrado.Nombre = veterinarioNuevo.Nombre != null ? veterinarioNuevo.Nombre : veterinarioEncontrado.Nombre;
+                veterinarioEncontrado.Telefono = veterinarioNuevo.Telefono != null ? veterinarioNuevo.Telefono : veterinarioEncontrado.Telefono;
+                veterinarioEncontrado.Edad = veterinarioNuevo.Edad != null ? veterinarioNuevo.Edad : veterinarioEncontrado.Edad;
+                veterinarioEncontrado.Correo = veterinarioNuevo.Correo != null ? veterinarioNuevo.Correo : veterinarioEncontrado.Correo;
+                veterinarioEncontrado.Especializacion = veterinarioNuevo.Especializacion != null ? veterinarioNuevo.Especializacion : veterinarioEncontrado.Especializacion;
+                veterinarioEncontrado.TarjetaProfesional = veterinarioNuevo.TarjetaProfesional != null ? veterinarioNuevo.TarjetaProfesional : veterinarioEncontrado.TarjetaProfesional;
                 this.appContext.SaveChanges();  
                 return veterinarioEncontrado;              
             } else {
