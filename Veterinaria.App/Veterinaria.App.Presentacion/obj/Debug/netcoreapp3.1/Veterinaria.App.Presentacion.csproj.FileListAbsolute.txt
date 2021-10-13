@@ -81,3 +81,5 @@ C:\Users\SIGMA\Desktop\Código Mintic Ciclo 3\ProyectoMinticCiclo3G26\Veterinari
 C:\Users\SIGMA\Desktop\Código Mintic Ciclo 3\ProyectoMinticCiclo3G26\Veterinaria.App\Veterinaria.App.Presentacion\bin\Debug\netcoreapp3.1\Veterinaria.App.Persistencia.dll
 C:\Users\SIGMA\Desktop\Código Mintic Ciclo 3\ProyectoMinticCiclo3G26\Veterinaria.App\Veterinaria.App.Presentacion\bin\Debug\netcoreapp3.1\Veterinaria.App.Dominio.pdb
 C:\Users\SIGMA\Desktop\Código Mintic Ciclo 3\ProyectoMinticCiclo3G26\Veterinaria.App\Veterinaria.App.Presentacion\bin\Debug\netcoreapp3.1\Veterinaria.App.Persistencia.pdb
+C:\Users\SIGMA\Desktop\Código Mintic Ciclo 3\ProyectoMinticCiclo3G26\Veterinaria.App\Veterinaria.App.Presentacion\obj\Debug\netcoreapp3.1\Razor\Pages\Admin\AdminCuidador.cshtml.g.cs
+C:\Users\SIGMA\Desktop\Código Mintic Ciclo 3\ProyectoMinticCiclo3G26\Veterinaria.App\Veterinaria.App.Presentacion\obj\Debug\netcoreapp3.1\Razor\Pages\Admin\AdminMascota.cshtml.g.cs

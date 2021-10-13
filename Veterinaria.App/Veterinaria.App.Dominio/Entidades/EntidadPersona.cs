@@ -8,7 +8,7 @@ namespace Veterinaria.App.Dominio
        
        public int Id {get; set;}
 
-    //    [Required] 
+      //    [Required] 
        [Required(ErrorMessage = "First Number is required.")]  
        public  String Nombre  {get; set;}
        public String Telefono  {get; set;}

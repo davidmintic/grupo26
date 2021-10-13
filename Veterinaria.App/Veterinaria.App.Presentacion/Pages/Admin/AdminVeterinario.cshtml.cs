@@ -13,71 +13,74 @@ namespace Veterinaria.App.Presentacion.Pages
     public class AdminVeterinarioModel : PageModel
     {
 
-        private static IRepositorioVeterinario repoVeterinario = new RepositorioVeterinario(new Persistencia.AppContext());
+        private static IRepositorioGenerico repoVeterinario = new RepositorioVeterinario(new Persistencia.AppContext());
 
         public String isNombreValid = "0";
 
-        public String titulo {get; set;} = "Bienvenido a la administración de de veterinarios";
+        public String titulo { get; set; } = "Bienvenido a la administración de de veterinarios";
 
         // public List <Veterinario> listaVeterinarios = new List<Veterinario>();
 
-       public IEnumerable <EntidadVeterinario> listaVeterinarios;
+        public IEnumerable<EntidadVeterinario> listaVeterinarios;
 
-       public EntidadVeterinario veterinarioActual;
+        public EntidadVeterinario veterinarioActual;
 
-       public String modeForm  {get; set;} = "adicion";
-       
+        public String modeForm { get; set; } = "adicion";
+
 
         public void OnGet(int id)
         {
-            if(id != 0){
-               this.veterinarioActual = repoVeterinario.GetVeterinario(id);
-                if(this.veterinarioActual != null) {
-                    this.modeForm = "edicion";                   
-                }                
-            } else{
-                 this.listaVeterinarios = repoVeterinario.GetVeterinarios();
-            }                                     
-        }
-        
-
-        public void OnPostEdi(EntidadVeterinario veterinarioNuevo){
-                      
-            var veterinarioEditado =  repoVeterinario.EditarVeterinario(veterinarioNuevo);          
-
-            if(veterinarioEditado !=  null) {
-                this.listaVeterinarios = repoVeterinario.GetVeterinarios();
-                Console.WriteLine("El veterinario ha sido editado");
-            } else {
-                 Console.WriteLine("Ocurrió un error al editar el veterinario");
+            if (id != 0)
+            {
+                this.veterinarioActual = (EntidadVeterinario)repoVeterinario.GetRegistro(id);
+                if (this.veterinarioActual != null)
+                {
+                    this.modeForm = "edicion";
+                }
+            }
+            else
+            {
+                this.ActualizarDatos();
             }
         }
 
 
-        public void OnPostAdd(EntidadVeterinario veterinario) {            
-            repoVeterinario.AgregarVeterinario(veterinario);
-            this.listaVeterinarios = repoVeterinario.GetVeterinarios();
-                     
+        public void OnPostEdi(EntidadVeterinario veterinarioNuevo)
+        {
+
+            var veterinarioEditado = (EntidadVeterinario)repoVeterinario.Editar(veterinarioNuevo);
+
+            if (veterinarioEditado != null)
+            {
+                this.ActualizarDatos();
+                Console.WriteLine("El veterinario ha sido editado");
+            }
+            else
+            {
+                Console.WriteLine("Ocurrió un error al editar el veterinario");
+            }
         }
 
 
+        public void OnPostAdd(EntidadVeterinario veterinario)
+        {
+            repoVeterinario.Agregar(veterinario);
+            this.ActualizarDatos();
 
-         public void OnPostDel(int id) {
-            repoVeterinario.EliminarVeterinario(id);
-            this.listaVeterinarios = repoVeterinario.GetVeterinarios();
+        }
+
+        public void OnPostDel(int id)
+        {
+            repoVeterinario.Eliminar(id);
+            this.ActualizarDatos();
         }
 
 
-    } 
+        public void ActualizarDatos()
+        {
+            this.listaVeterinarios = (IEnumerable<EntidadVeterinario>)repoVeterinario.GetTodosLosRegistros();
+        }
 
-
-    public class Veterinario{
-
-        public int Index { get; set; }
-        public String Nombre {get; set;}
-        public String Telefono {get; set;}
-        public int Edad {get; set;}
-        public String Correo {get; set;}
 
     }
 

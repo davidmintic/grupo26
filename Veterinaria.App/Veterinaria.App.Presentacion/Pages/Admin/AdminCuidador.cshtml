@@ -1,5 +1,5 @@
 ﻿@page
-@model Veterinaria.App.Presentacion.Pages.AdminVeterinarioModel
+@model Veterinaria.App.Presentacion.Pages.AdminCuidadorModel
 @{
 }
 
@@ -38,8 +38,8 @@
                     </thead>
                     <tbody>
 
-                        @if(Model.listaVeterinarios != null){
-                            foreach (var v in Model.listaVeterinarios)
+                        @if(Model.listaCuidadores != null){
+                            foreach (var v in Model.listaCuidadores)
                             {
                             <tr>
 
@@ -54,6 +54,12 @@
                                                 <a class="btn btn-primary" asp-page="/Admin/AdminVeterinario" asp-route-id="@v.Id"
                                                 style="background: #673ab7;border-color: #673ab7;">
                                                     Editar
+                                                </a>
+                                            </div>
+                                             <div class="col">
+                                                <a class="btn btn-primary" asp-page="/Admin/AdminMascota" asp-route-id="@v.Id"
+                                                style="background: #673ab7;border-color: #673ab7;">
+                                                    Ver mascotas
                                                 </a>
                                             </div>
                                             <div class="col">
@@ -124,20 +130,20 @@
                         <div class="row">
 
                              <input type="hidden"
-                             asp-for="@Model.veterinarioActual.Id"  class="form-control"
+                             asp-for="@Model.cuidadorActual.Id"  class="form-control"
                                          name="Id">
 
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label asp-for="@Model.veterinarioActual.Nombre">Nombre (*)</label>
-                                    <input asp-for="@Model.veterinarioActual.Nombre" type="text" class="form-control"
+                                    <label asp-for="@Model.cuidadorActual.Nombre">Nombre (*)</label>
+                                    <input asp-for="@Model.cuidadorActual.Nombre" type="text" class="form-control"
                                          name="Nombre" required autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label asp-for="@Model.veterinarioActual.Telefono">Telefono (*)</label>
-                                    <input asp-for="@Model.veterinarioActual.Telefono" type="tel" class="form-control"
+                                    <label asp-for="@Model.cuidadorActual.Telefono">Telefono (*)</label>
+                                    <input asp-for="@Model.cuidadorActual.Telefono" type="tel" class="form-control"
                                         aria-describedby="id-message-telefono" name="Telefono" required>
 
                                 </div>
@@ -147,16 +153,16 @@
                         <div class="row">
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label asp-for="@Model.veterinarioActual.Edad">Edad (*)</label>
-                                    <input asp-for="@Model.veterinarioActual.Edad" type="number" class="form-control"
+                                    <label asp-for="@Model.cuidadorActual.Edad">Edad (*)</label>
+                                    <input asp-for="@Model.cuidadorActual.Edad" type="number" class="form-control"
                                         aria-describedby="id-message-edad" name="Edad" required>
 
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label asp-for="@Model.veterinarioActual.Correo">Correo (*)</label>
-                                    <input asp-for="@Model.veterinarioActual.Correo" type="email" class="form-control"
+                                    <label asp-for="@Model.cuidadorActual.Correo">Correo (*)</label>
+                                    <input asp-for="@Model.cuidadorActual.Correo" type="email" class="form-control"
                                         aria-describedby="id-message-correo" name="Correo" required>
 
                                 </div>
@@ -167,31 +173,13 @@
                         <div class="row">
                             <div class="col-sm">
                                 <div class="form-group">
-                                    <label asp-for="@Model.veterinarioActual.Contrasenia">Contrasenia (*)</label>
-                                    <input asp-for="@Model.veterinarioActual.Contrasenia" type="password"
+                                    <label asp-for="@Model.cuidadorActual.Contrasenia">Contrasenia (*)</label>
+                                    <input asp-for="@Model.cuidadorActual.Contrasenia" type="password"
                                         class="form-control" aria-describedby="id-message-edad" name="Contrasenia">
                                 </div>
                             </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <label asp-for="@Model.veterinarioActual.TarjetaProfesional">Tarjeta
-                                        profesional</label>
-                                    <input asp-for="@Model.veterinarioActual.TarjetaProfesional" type="text"
-                                        class="form-control" aria-describedby="id-message-correo"
-                                        name="TarjetaProfesional">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <label asp-for="@Model.veterinarioActual.Especializacion">Especialización</label>
-                                    <input asp-for="@Model.veterinarioActual.Especializacion" type="text"
-                                        class="form-control" aria-describedby="id-message-edad" name="Especializacion">
-                                </div>
-                            </div>                           
-                        </div>
+                            
+                        </div>                       
 
                     </div>
 
@@ -208,4 +196,3 @@
     </div>
 
 </div>
-
